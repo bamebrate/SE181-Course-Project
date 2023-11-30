@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="banking.SavingsTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2023-11-30T20:57:50" hostname="n3-93-174.dhcp.drexel.edu" time="0.002">
+  <properties/>
+  <testcase name="withdraw_from_savings()" classname="banking.SavingsTest" time="0.0"/>
+  <testcase name="savings_has_specified_apr()" classname="banking.SavingsTest" time="0.0"/>
+  <testcase name="deposits_can_be_made_into_savings()" classname="banking.SavingsTest" time="0.0"/>
+  <testcase name="withdrawing_more_than_balance_from_savings()" classname="banking.SavingsTest" time="0.001"/>
+  <testcase name="savings_has_a_balance_of_0()" classname="banking.SavingsTest" time="0.0"/>
+  <testcase name="depositing_twice()" classname="banking.SavingsTest" time="0.001"/>
+  <testcase name="withdrawing_twice()" classname="banking.SavingsTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
