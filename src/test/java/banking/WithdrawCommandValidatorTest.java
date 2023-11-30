@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WithdrawCommandValidatorTest {
+
     private Bank bank;
     private String commandAsString;
     private CommandValidator commandValidator;
@@ -20,7 +21,8 @@ public class WithdrawCommandValidatorTest {
     @Test
     void withdrawing_from_an_existing_account() {
         bank.addSavingsAccount("12345678", 3.2);
-        commandAsString = "Withdraw 12345678 1000";
+        bank.depositMoneyById("12345678", 1000);
+        commandAsString = "Withdraw 12345678 300";
         assertTrue(commandValidator.validate(commandAsString));
     }
 
@@ -82,6 +84,7 @@ public class WithdrawCommandValidatorTest {
     @Test
     void a_zero_value_for_withdraw_amount_in_savings() {
         bank.addSavingsAccount("12345678", 3.2);
+        bank.depositMoneyById("12345678", 1000);
         commandAsString = "withdraw 12345678 0";
         assertTrue(commandValidator.validate(commandAsString));
     }
@@ -100,16 +103,11 @@ public class WithdrawCommandValidatorTest {
         assertFalse(commandValidator.validate(commandAsString));
     }
 
-    @Test
-    void cd_account_cant_make_a_withdrawal() {
-        bank.addCDAccount("12345678", 0.1, 1000);
-        commandAsString = ("withdraw 12345678 100");
-        assertFalse(commandValidator.validate(commandAsString));
-    }
 
     @Test
     void withdraw_1000_in_savings() {
         bank.addSavingsAccount("12345678", 0.63);
+        bank.depositMoneyById("12345678", 1000);
         commandAsString = "withdraw 12345678 1000";
         assertTrue(commandValidator.validate(commandAsString));
     }
@@ -117,6 +115,7 @@ public class WithdrawCommandValidatorTest {
     @Test
     void withdraw_over_1000_in_savings() {
         bank.addSavingsAccount("12345678", 0.63);
+        bank.depositMoneyById("12345678", 1000);
         commandAsString = "withdraw 12345678 1050";
         assertFalse(commandValidator.validate(commandAsString));
     }
@@ -124,6 +123,7 @@ public class WithdrawCommandValidatorTest {
     @Test
     void a_zero_value_for_withdraw_amount_in_checkings() {
         bank.addCheckingAccount("12345678", 3.2);
+        bank.depositMoneyById("12345678", 1000);
         commandAsString = "withdraw 12345678 0";
         assertTrue(commandValidator.validate(commandAsString));
     }
@@ -131,13 +131,15 @@ public class WithdrawCommandValidatorTest {
     @Test
     void withdrawing_negative_amount_into_checking_account() {
         bank.addCheckingAccount("12345678", 3.2);
+        bank.depositMoneyById("12345678", 1000);
         commandAsString = "Withdraw 12345678 -100";
         assertFalse(commandValidator.validate(commandAsString));
     }
 
     @Test
-    void deposit_400_dollars_into_checking() {
+    void withdraw_400_dollars_into_checking() {
         bank.addCheckingAccount("12345678", 3.2);
+        bank.depositMoneyById("12345678", 1000);
         commandAsString = "Withdraw 12345678 400";
         assertTrue(commandValidator.validate(commandAsString));
     }
@@ -145,7 +147,19 @@ public class WithdrawCommandValidatorTest {
     @Test
     void withdraw_over_400_dollars_into_checking() {
         bank.addCheckingAccount("12345678", 3.2);
+        bank.depositMoneyById("12345678", 1000);
         commandAsString = "Withdraw 12345678 401";
+        assertFalse(commandValidator.validate(commandAsString));
+    }
+
+    /**
+     * ADD MORE TESTS FOR PASS TIME CD ACCOUNTS and pass time savings
+     **/
+    @Test
+    void cd_account_younger_than_twelve_months_cant_make_a_withdrawal() {
+        bank.addCDAccount("12345678", 0.1, 1000);
+        bank.depositMoneyById("12345678", 1000);
+        commandAsString = ("withdraw 12345678 100");
         assertFalse(commandValidator.validate(commandAsString));
     }
 }

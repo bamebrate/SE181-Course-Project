@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="banking.WithdrawCommandValidatorTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2023-11-30T22:34:31" hostname="n3-93-174.dhcp.drexel.edu" time="0.008">
+<testsuite name="banking.WithdrawCommandValidatorTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2023-11-30T23:03:40" hostname="n3-93-174.dhcp.drexel.edu" time="0.033">
   <properties/>
-  <testcase name="a_zero_value_for_withdraw_amount_in_checkings()" classname="banking.WithdrawCommandValidatorTest" time="0.001"/>
+  <testcase name="a_zero_value_for_withdraw_amount_in_checkings()" classname="banking.WithdrawCommandValidatorTest" time="0.012"/>
+  <testcase name="withdraw_400_dollars_into_checking()" classname="banking.WithdrawCommandValidatorTest" time="0.001"/>
   <testcase name="missing_withdraw_amount_and_ID()" classname="banking.WithdrawCommandValidatorTest" time="0.001"/>
-  <testcase name="withdrawing_a_nonexistant_account()" classname="banking.WithdrawCommandValidatorTest" time="0.0"/>
+  <testcase name="withdrawing_a_nonexistant_account()" classname="banking.WithdrawCommandValidatorTest" time="0.001"/>
   <testcase name="withdrawing_negative_amount_into_checking_account()" classname="banking.WithdrawCommandValidatorTest" time="0.0"/>
   <testcase name="missing_withdraw_amount()" classname="banking.WithdrawCommandValidatorTest" time="0.0"/>
-  <testcase name="withdraw_amount_has_unexpected_symbol()" classname="banking.WithdrawCommandValidatorTest" time="0.0"/>
+  <testcase name="withdraw_amount_has_unexpected_symbol()" classname="banking.WithdrawCommandValidatorTest" time="0.001"/>
   <testcase name="ID_is_not_8_digits_for_withdrawing()" classname="banking.WithdrawCommandValidatorTest" time="0.0"/>
-  <testcase name="missing_the_withdraw_command()" classname="banking.WithdrawCommandValidatorTest" time="0.0"/>
-  <testcase name="a_zero_value_for_withdraw_amount_in_savings()" classname="banking.WithdrawCommandValidatorTest" time="0.0"/>
+  <testcase name="missing_the_withdraw_command()" classname="banking.WithdrawCommandValidatorTest" time="0.001"/>
+  <testcase name="a_zero_value_for_withdraw_amount_in_savings()" classname="banking.WithdrawCommandValidatorTest" time="0.001"/>
   <testcase name="withdrawing_from_an_existing_account()" classname="banking.WithdrawCommandValidatorTest" time="0.0"/>
   <testcase name="withdraw_over_1000_in_savings()" classname="banking.WithdrawCommandValidatorTest" time="0.0"/>
   <testcase name="withdraw_1000_in_savings()" classname="banking.WithdrawCommandValidatorTest" time="0.0"/>
-  <testcase name="withdraw_over_400_dollars_into_checking()" classname="banking.WithdrawCommandValidatorTest" time="0.0"/>
-  <testcase name="non_numerical_value_for_ID_of_account()" classname="banking.WithdrawCommandValidatorTest" time="0.0"/>
-  <testcase name="invalid_withdraw_amount_type()" classname="banking.WithdrawCommandValidatorTest" time="0.001"/>
-  <testcase name="missing_every_command_or_is_empty()" classname="banking.WithdrawCommandValidatorTest" time="0.0"/>
-  <testcase name="deposit_400_dollars_into_checking()" classname="banking.WithdrawCommandValidatorTest" time="0.001"/>
-  <testcase name="negative_value_for_withdraw_amount()" classname="banking.WithdrawCommandValidatorTest" time="0.0"/>
-  <testcase name="cd_account_cant_make_a_withdrawal()" classname="banking.WithdrawCommandValidatorTest" time="0.001"/>
+  <testcase name="withdraw_over_400_dollars_into_checking()" classname="banking.WithdrawCommandValidatorTest" time="0.001"/>
+  <testcase name="non_numerical_value_for_ID_of_account()" classname="banking.WithdrawCommandValidatorTest" time="0.001"/>
+  <testcase name="invalid_withdraw_amount_type()" classname="banking.WithdrawCommandValidatorTest" time="0.002"/>
+  <testcase name="missing_every_command_or_is_empty()" classname="banking.WithdrawCommandValidatorTest" time="0.001"/>
+  <testcase name="cd_account_younger_than_twelve_months_cant_make_a_withdrawal()" classname="banking.WithdrawCommandValidatorTest" time="0.001"/>
+  <testcase name="negative_value_for_withdraw_amount()" classname="banking.WithdrawCommandValidatorTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

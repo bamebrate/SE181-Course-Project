@@ -33,9 +33,10 @@ public class WithdrawCommandValidator {
         }
         if (account.getType() == "banking.Savings") {
             return (balance >= 0 && balance <= 1000);
-        } else {
+        } else if (account.getType() == "banking.Checking") {
             return (balance >= 0 && balance <= 400);
         }
+        return false;
     }
 
     private boolean stringCommandHasCorrectID(String[] commandArr) {
