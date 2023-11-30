@@ -99,4 +99,53 @@ public class WithdrawCommandValidatorTest {
         commandAsString = ("withdraw 12345678 1,000");
         assertFalse(commandValidator.validate(commandAsString));
     }
+
+    @Test
+    void cd_account_cant_make_a_withdrawal() {
+        bank.addCDAccount("12345678", 0.1, 1000);
+        commandAsString = ("withdraw 12345678 100");
+        assertFalse(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void withdraw_1000_in_savings() {
+        bank.addSavingsAccount("12345678", 0.63);
+        commandAsString = "withdraw 12345678 1000";
+        assertTrue(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void withdraw_over_1000_in_savings() {
+        bank.addSavingsAccount("12345678", 0.63);
+        commandAsString = "withdraw 12345678 1050";
+        assertFalse(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void a_zero_value_for_withdraw_amount_in_checkings() {
+        bank.addCheckingAccount("12345678", 3.2);
+        commandAsString = "withdraw 12345678 0";
+        assertTrue(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void withdrawing_negative_amount_into_checking_account() {
+        bank.addCheckingAccount("12345678", 3.2);
+        commandAsString = "Withdraw 12345678 -100";
+        assertFalse(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void deposit_400_dollars_into_checking() {
+        bank.addCheckingAccount("12345678", 3.2);
+        commandAsString = "Withdraw 12345678 400";
+        assertTrue(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void withdraw_over_400_dollars_into_checking() {
+        bank.addCheckingAccount("12345678", 3.2);
+        commandAsString = "Withdraw 12345678 401";
+        assertFalse(commandValidator.validate(commandAsString));
+    }
 }
