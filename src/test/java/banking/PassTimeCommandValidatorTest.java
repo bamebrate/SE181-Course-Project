@@ -35,5 +35,52 @@ public class PassTimeCommandValidatorTest {
         assertTrue(commandValidator.validate(commandAsString));
     }
 
+    @Test
+    void month_is_less_than_correct_range() {
+        commandAsString = "pass 0";
+        assertFalse(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void month_is_greater_than_correct_range() {
+        commandAsString = "pass 62";
+        assertFalse(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void month_is_61() {
+        commandAsString = "pass 61";
+        assertTrue(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void month_is_1() {
+        commandAsString = "pass 1";
+        assertTrue(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void month_is_negative() {
+        commandAsString = "pass -2";
+        assertFalse(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void month_is_not_an_int() {
+        commandAsString = "pass 2.2";
+        assertFalse(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void month_has_unexpected_symbols() {
+        commandAsString = "pass '12 ";
+        assertFalse(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void month_has_letters_in_it() {
+        commandAsString = "pass 12abc ";
+        assertFalse(commandValidator.validate(commandAsString));
+    }
 
 }
