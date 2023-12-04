@@ -16,6 +16,9 @@ public class CommandProcessor {
         } else if (commandArr[0].equalsIgnoreCase("Deposit")) {
             DepositCommandProcessor commandProcessor = new DepositCommandProcessor(bank);
             commandProcessor.execute(commandArr);
+        } else if (commandArr[0].equalsIgnoreCase("withdraw")) {
+            WithdrawCommandProcessor commandProcessor = new WithdrawCommandProcessor(bank);
+            commandProcessor.execute(commandArr);
         } else if (commandArr[0].equalsIgnoreCase("Pass")) {
             PassTimeCommandProcessor commandProcessor = new PassTimeCommandProcessor(bank);
             commandProcessor.execute(commandArr);
