@@ -22,6 +22,9 @@ public class CommandValidator {
             } else if (commandArr[0].equalsIgnoreCase("pass")) {
                 PassTimeCommandValidator validator = new PassTimeCommandValidator(bank);
                 return validator.validate(commandArr);
+            } else if (commandArr[0].equalsIgnoreCase("Transfer")) {
+                TranferCommandValidator validator = new TranferCommandValidator(bank);
+                return validator.validate(commandArr);
             } else {
                 return false;
             }

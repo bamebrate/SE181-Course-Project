@@ -47,4 +47,6 @@ public abstract class Account {
             balance += ((apr / 100) / 12) * balance;
         }
     }
+
+    public abstract boolean canTransfer();
 }
