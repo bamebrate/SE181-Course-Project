@@ -37,12 +37,12 @@ public class Bank {
     }
 
     public void passTime(int month) {
-        List<String> accountsToRemove = new ArrayList<>();
+        List<String> accountsToClose = new ArrayList<>();
 
         for (String accountID : accounts.keySet()) {
             Account account = accounts.get(accountID);
             if (account.balance == 0) {
-                accountsToRemove.add(accountID);
+                accountsToClose.add(accountID);
                 continue;
             }
             account.passTimeAndCalculateAPR(month);

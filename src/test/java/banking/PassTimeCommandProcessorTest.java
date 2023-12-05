@@ -33,6 +33,15 @@ public class PassTimeCommandProcessorTest {
         commandProcessor.execute(CommandAsString);
         assertEquals(5002.5, bank.getAccounts().get("12345678").getBalance());
     }
+
+    @Test
+    void pass_1_month_on_cd_account() {
+        bank.addCDAccount("12345678", 0.6, 0);
+        bank.depositMoneyById("12345678", 5000);
+        CommandAsString = "pass 1";
+        commandProcessor.execute(CommandAsString);
+        assertEquals(5002.5, bank.getAccounts().get("12345678").getBalance());
+    }
 }
 
 

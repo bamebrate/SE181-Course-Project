@@ -10,18 +10,13 @@ public class WithdrawCommandValidator {
     public boolean validate(String[] commandArr) {
         if (commandArr.length == 3) {
             if (stringCommandHasCorrectID(commandArr) && stringCommandHasCorrectWithdrawAmount(commandArr)
-                    && stringCommandAccountTypeIsNotCD(commandArr)) {
+            ) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean stringCommandAccountTypeIsNotCD(String[] commandArr) {
-        Account account = bank.getAccounts().get(commandArr[1]);
-        return !(account.getType() == "banking.CD");
-
-    }
 
     private boolean stringCommandHasCorrectWithdrawAmount(String[] commandArr) {
         double balance;
@@ -35,6 +30,8 @@ public class WithdrawCommandValidator {
             return (balance >= 0 && balance <= 1000);
         } else if (account.getType() == "banking.Checking") {
             return (balance >= 0 && balance <= 400);
+        } else if (account.getType() == "banking.CD") {
+            return (balance >= account.getBalance() && account.getAge() >= 12);
         }
         return false;
     }

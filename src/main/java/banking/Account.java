@@ -4,7 +4,7 @@ public abstract class Account {
     public double balance = 0;
     private String id;
     private double apr;
-    private int age;
+    private int age = 0;
 
     public Account(String id, double apr) {
         this.id = id;
@@ -36,6 +36,10 @@ public abstract class Account {
     }
 
     public abstract String getType();
+
+    public int getAge() {
+        return age;
+    }
 
     public void passTimeAndCalculateAPR(int month) {
         age += month;

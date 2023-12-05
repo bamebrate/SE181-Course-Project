@@ -121,7 +121,7 @@ public class WithdrawCommandValidatorTest {
     }
 
     @Test
-    void a_zero_value_for_withdraw_amount_in_checkings() {
+    void a_zero_value_for_withdraw_amount_in_checking() {
         bank.addCheckingAccount("12345678", 3.2);
         bank.depositMoneyById("12345678", 1000);
         commandAsString = "withdraw 12345678 0";
@@ -162,4 +162,30 @@ public class WithdrawCommandValidatorTest {
         commandAsString = ("withdraw 12345678 100");
         assertFalse(commandValidator.validate(commandAsString));
     }
+
+    @Test
+    void cd_account_older_than_twelve_months_can_make_a_withdrawal() {
+        bank.addCDAccount("12345678", 0.6, 5000);
+        bank.passTime(12);
+        commandAsString = ("withdraw 12345678 5030.80");
+        assertTrue(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void cd_account_older_than_twelve_months_can_make_a_withdrawal_of_more_than_the_current_available_balance() {
+        bank.addCDAccount("12345678", 0.6, 5000);
+        bank.passTime(12);
+        commandAsString = ("withdraw 12345678 6000.80");
+        assertTrue(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void cd_account_older_than_twelve_months_can_not_make_a_withdrawal_of_less_than_the_current_available_balance() {
+        bank.addCDAccount("12345678", 0.6, 5000);
+        bank.passTime(12);
+        commandAsString = ("withdraw 12345678 3000.80");
+        assertFalse(commandValidator.validate(commandAsString));
+    }
+
+
 }
