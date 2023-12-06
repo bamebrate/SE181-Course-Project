@@ -167,5 +167,95 @@ public class TransferCommandValidatorTest {
         assertFalse(commandValidator.validate(commandAsString));
     }
 
+    @Test
+    void transfer_from_cd_to_savings() {
+        bank.addCDAccount("00000001", 3, 1000);
+        bank.depositMoneyById("00000001", 100);
+        bank.addSavingsAccount("00000002", 3);
+        bank.depositMoneyById("00000002", 100);
+        commandAsString = "Transfer 00000001 00000002 50";
+        assertFalse(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void transfer_from_checking_to_cd() {
+        bank.addCheckingAccount("00000001", 3);
+        bank.depositMoneyById("00000001", 100);
+        bank.addCDAccount("00000002", 4, 1000);
+        bank.depositMoneyById("00000002", 100);
+        commandAsString = "Transfer 00000001 00000002 50";
+        assertFalse(commandValidator.validate(commandAsString));
+    }
+
+
+    @Test
+    void transferring_400_from_checking_to_savings() {
+        bank.addCheckingAccount("00000001", 3);
+        bank.depositMoneyById("00000001", 100);
+        bank.addSavingsAccount("00000002", 4);
+        bank.depositMoneyById("00000002", 100);
+        commandAsString = "Transfer 00000001 00000002 400";
+        assertTrue(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void transferring_over_400_from_checking_to_savings() {
+        bank.addCheckingAccount("00000001", 3);
+        bank.depositMoneyById("00000001", 100);
+        bank.addSavingsAccount("00000002", 4);
+        bank.depositMoneyById("00000002", 100);
+        commandAsString = "Transfer 00000001 00000002 401";
+        assertFalse(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void transferring_over_400_from_savings_to_checking() {
+        bank.addCheckingAccount("00000001", 3);
+        bank.depositMoneyById("00000001", 100);
+        bank.addSavingsAccount("00000002", 4);
+        bank.depositMoneyById("00000002", 100);
+        commandAsString = "Transfer 00000002 00000001 401";
+        assertTrue(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void transferring_1000_from_savings_to_savings() {
+        bank.addSavingsAccount("00000001", 3);
+        bank.depositMoneyById("00000001", 100);
+        bank.addSavingsAccount("00000002", 4);
+        bank.depositMoneyById("00000002", 100);
+        commandAsString = "Transfer 00000001 00000002 1000";
+        assertTrue(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void transferring_over_1000_from_savings_to_savings() {
+        bank.addSavingsAccount("00000001", 3);
+        bank.depositMoneyById("00000001", 100);
+        bank.addSavingsAccount("00000002", 4);
+        bank.depositMoneyById("00000002", 100);
+        commandAsString = "Transfer 00000001 00000002 1001";
+        assertFalse(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void transferring_0_from_savings_to_savings() {
+        bank.addSavingsAccount("00000001", 3);
+        bank.depositMoneyById("00000001", 100);
+        bank.addSavingsAccount("00000002", 4);
+        bank.depositMoneyById("00000002", 100);
+        commandAsString = "Transfer 00000001 00000002 0";
+        assertTrue(commandValidator.validate(commandAsString));
+    }
+
+    @Test
+    void transferring_negative_value_from_savings_to_savings() {
+        bank.addSavingsAccount("00000001", 3);
+        bank.depositMoneyById("00000001", 100);
+        bank.addSavingsAccount("00000002", 4);
+        bank.depositMoneyById("00000002", 100);
+        commandAsString = "Transfer 00000001 00000002 -10";
+        assertFalse(commandValidator.validate(commandAsString));
+    }
 
 }
