@@ -35,7 +35,6 @@ public abstract class Account {
         }
     }
 
-    public abstract String getType();
 
     public int getAge() {
         return age;
@@ -49,4 +48,8 @@ public abstract class Account {
     }
 
     public abstract boolean canTransfer();
+
+    public abstract boolean canWithdraw(double balance, double amount, int age);
+
+    public abstract boolean canDeposit(double amount);
 }

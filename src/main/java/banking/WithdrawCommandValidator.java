@@ -19,21 +19,20 @@ public class WithdrawCommandValidator {
 
 
     private boolean stringCommandHasCorrectWithdrawAmount(String[] commandArr) {
-        double balance;
+        double amount;
         Account account = bank.getAccounts().get(commandArr[1]);
+        int age = account.getAge();
+        double balance = account.getBalance();
+
+
         try {
-            balance = Double.parseDouble(commandArr[2]);
+            amount = Double.parseDouble(commandArr[2]);
         } catch (NumberFormatException e) {
             return false;
         }
-        if (account.getType() == "banking.Savings") {
-            return (balance >= 0 && balance <= 1000);
-        } else if (account.getType() == "banking.Checking") {
-            return (balance >= 0 && balance <= 400);
-        } else if (account.getType() == "banking.CD") {
-            return (balance >= account.getBalance() && account.getAge() >= 12);
-        }
-        return false;
+        boolean canWithdraw = account.canWithdraw(balance, amount, age);
+        return canWithdraw;
+
     }
 
     private boolean stringCommandHasCorrectID(String[] commandArr) {
