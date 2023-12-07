@@ -22,6 +22,9 @@ public class CommandProcessor {
         } else if (commandArr[0].equalsIgnoreCase("Pass")) {
             PassTimeCommandProcessor commandProcessor = new PassTimeCommandProcessor(bank);
             commandProcessor.execute(commandArr);
+        } else if (commandArr[0].equalsIgnoreCase("Transfer")) {
+            TransferCommandProcessor commandProcessor = new TransferCommandProcessor(bank);
+            commandProcessor.execute(commandArr);
         }
     }
 }

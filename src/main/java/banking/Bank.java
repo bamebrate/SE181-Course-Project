@@ -36,6 +36,11 @@ public class Bank {
         accounts.get(id).withdrawMoney(amount);
     }
 
+    public void transferMoneyById(String fromID, String toID, int amount) {
+        accounts.get(fromID).withdrawMoney(amount);
+        accounts.get(toID).depositMoney(amount);
+    }
+
     public void passTime(int month) {
         List<String> accountsToClose = new ArrayList<>();
 
