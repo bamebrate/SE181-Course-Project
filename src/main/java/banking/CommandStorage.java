@@ -33,8 +33,7 @@ public class CommandStorage {
     public void storeValidCommand(String validCommand) {
         String[] commandArr = validCommand.split(" ");
 
-        if (commandArr[0].equalsIgnoreCase("create") ||
-                commandArr[0].equalsIgnoreCase("withdraw") ||
+        if (commandArr[0].equalsIgnoreCase("withdraw") ||
                 commandArr[0].equalsIgnoreCase("deposit")) {
             addToMap(validCommands, commandArr[1], validCommand);
         } else if (commandArr[0].equalsIgnoreCase("transfer")) {

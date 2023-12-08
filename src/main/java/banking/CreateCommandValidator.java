@@ -34,7 +34,7 @@ public class CreateCommandValidator {
     }
 
     private boolean isCDAccount(String[] commandArr) {
-        return commandArr[1].equalsIgnoreCase("banking.cd");
+        return commandArr[1].equalsIgnoreCase("cd");
 
     }
 

@@ -3,8 +3,7 @@ package banking;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -72,5 +71,34 @@ public class MasterControlTest {
         assertEquals("create checking 12345678 1.0", actual.get(1));
 
     }
+
+
+    @Test
+    void sample_list_of_inputs() {
+        command.add("Create savings 12345678 0.6");
+        command.add("Deposit 12345678 700");
+        command.add("Deposit 12345678 5000");
+        command.add("creAte cHecKing 98765432 0.01");
+        command.add("Deposit 98765432 300");
+        command.add("Transfer 98765432 12345678 300");
+        command.add("Create cd 23456789 1.2 2000");
+
+        List<String> actual = masterControl.start(command);
+        Set<String> expectedSet = new HashSet<>(Arrays.asList(
+                "Savings 12345678 1000.00 0.60",
+                "Deposit 12345678 700",
+                "Transfer 98765432 12345678 300",
+                "Checking 98765432 0.00 0.01",
+                "Deposit 98765432 300",
+                "Transfer 98765432 12345678 300",
+                "Cd 23456789 2000.00 1.20",
+                "Deposit 12345678 5000"
+        ));
+        Set<String> actualSet = new HashSet<>(actual);
+
+        assertEquals(expectedSet, actualSet);
+
+    }
+
 
 }

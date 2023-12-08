@@ -36,7 +36,7 @@ public class CreateCommandProcessorTest {
 
     @Test
     void create_CD_account() {
-        CommandAsString = "create banking.CD 12345678 0.01 1000";
+        CommandAsString = "create CD 12345678 0.01 1000";
         commandProcessor.execute(CommandAsString);
         assertEquals(1000, bank.getAccounts().get("12345678").getBalance());
         assertEquals(0.01, bank.getAccounts().get("12345678").getAPR());

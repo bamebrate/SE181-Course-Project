@@ -42,6 +42,6 @@ public class CD extends Account {
         decimalFormat.setRoundingMode(RoundingMode.FLOOR);
         String formattedBalance = decimalFormat.format(account.getBalance());
         String formattedAPR = decimalFormat.format(account.getAPR());
-        return "CD" + " " + account.getId() + " " + formattedBalance + " " + formattedAPR;
+        return "Cd" + " " + account.getId() + " " + formattedBalance + " " + formattedAPR;
     }
 }
