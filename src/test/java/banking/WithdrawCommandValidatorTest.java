@@ -167,7 +167,7 @@ public class WithdrawCommandValidatorTest {
     void cd_account_older_than_twelve_months_can_make_a_withdrawal() {
         bank.addCDAccount("12345678", 0.6, 5000);
         bank.passTime(12);
-        commandAsString = ("withdraw 12345678 5030.80");
+        commandAsString = ("withdraw 12345678 6000");
         assertTrue(commandValidator.validate(commandAsString));
     }
 

@@ -14,7 +14,6 @@ public class TransferCommandProcessor {
         if (amount > bank.getAccounts().get(fromID).getBalance()) {
             amount = bank.getAccounts().get(fromID).getBalance();
         }
-        bank.getAccounts().get(fromID).withdrawMoney(amount);
-        bank.getAccounts().get(toID).depositMoney(amount);
+        bank.transferMoneyById(fromID, toID, amount);
     }
 }
