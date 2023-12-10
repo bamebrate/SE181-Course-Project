@@ -48,8 +48,8 @@ public class PassTimeCommandValidatorTest {
     }
 
     @Test
-    void month_is_61() {
-        commandAsString = "pass 61";
+    void month_is_60() {
+        commandAsString = "pass 60";
         assertTrue(commandValidator.validate(commandAsString));
     }
 

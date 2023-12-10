@@ -113,6 +113,16 @@ public class WithdrawCommandValidatorTest {
     }
 
     @Test
+    void cannot_withdraw_from_savings_account_more_than_once_a_month() {
+        bank.addSavingsAccount("12345678", 0.91);
+        bank.depositMoneyById("12345678", 500);
+        commandAsString = "withdraw 12345678 200";
+        assertTrue(commandValidator.validate(commandAsString));
+        commandAsString = "withdraw 12345678 300";
+        assertFalse(commandValidator.validate(commandAsString));
+    }
+
+    @Test
     void withdraw_over_1000_in_savings() {
         bank.addSavingsAccount("12345678", 0.63);
         bank.depositMoneyById("12345678", 1000);

@@ -9,8 +9,7 @@ public class WithdrawCommandValidator {
 
     public boolean validate(String[] commandArr) {
         if (commandArr.length == 3) {
-            if (stringCommandHasCorrectID(commandArr) && stringCommandHasCorrectWithdrawAmount(commandArr)
-            ) {
+            if (stringCommandHasCorrectID(commandArr) && stringCommandHasCorrectWithdrawAmount(commandArr)) {
                 return true;
             }
         }

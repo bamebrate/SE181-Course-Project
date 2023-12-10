@@ -77,7 +77,9 @@ public class MasterControlTest {
     void sample_list_of_inputs() {
         command.add("Create savings 12345678 0.6");
         command.add("Deposit 12345678 700");
-        command.add("Deposit 12345678 5000");
+        command.add("Withdraw 12345678 200");
+        command.add("Pass 1");
+        command.add("Withdraw 12345678 200");
         command.add("creAte cHecKing 98765432 0.01");
         command.add("Deposit 98765432 300");
         command.add("Transfer 98765432 12345678 300");
@@ -85,14 +87,15 @@ public class MasterControlTest {
 
         List<String> actual = masterControl.start(command);
         Set<String> expectedSet = new HashSet<>(Arrays.asList(
-                "Savings 12345678 1000.00 0.60",
+                "Savings 12345678 600.25 0.60",
                 "Deposit 12345678 700",
+                "Withdraw 12345678 200",
+                "Withdraw 12345678 200",
                 "Transfer 98765432 12345678 300",
                 "Checking 98765432 0.00 0.01",
                 "Deposit 98765432 300",
                 "Transfer 98765432 12345678 300",
-                "Cd 23456789 2000.00 1.20",
-                "Deposit 12345678 5000"
+                "Cd 23456789 2000.00 1.20"
         ));
         Set<String> actualSet = new HashSet<>(actual);
 

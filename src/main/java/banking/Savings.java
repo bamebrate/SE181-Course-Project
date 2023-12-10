@@ -5,6 +5,9 @@ import java.text.DecimalFormat;
 
 public class Savings extends Account {
 
+    private boolean maxWithdrawalMet = false;
+    private int previousWithdrawMonth = -1; // Initialize to an invalid value
+
     public Savings(String id, double apr) {
         super(id, apr);
     }
@@ -17,6 +20,7 @@ public class Savings extends Account {
         String formattedAPR = decimalFormat.format(account.getAPR());
         return "Savings" + " " + account.getId() + " " + formattedBalance + " " + formattedAPR;
     }
+
 
     @Override
     public void passTimeAndCalculateAPR(int month) {
@@ -34,7 +38,11 @@ public class Savings extends Account {
 
     @Override
     public boolean canWithdraw(double balance, double amount, int age) {
-        return (amount >= 0 && amount <= 1000);
+        if ((amount >= 0 && amount <= 1000) && !maxWithdrawalMet && age != previousWithdrawMonth) {
+            previousWithdrawMonth = age; // Update the previous withdrawal month
+            return true;
+        }
+        return false;
     }
 
     @Override

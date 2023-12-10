@@ -23,7 +23,7 @@ public class PassTimeCommandValidator {
         } catch (NumberFormatException e) {
             return false;
         }
-        return (month > 0) && (month <= 61);
+        return (month > 0) && (month <= 60);
 
     }
 }

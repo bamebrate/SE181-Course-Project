@@ -14,8 +14,8 @@ public class MasterControl {
         this.commandStorage = commandStorage;
     }
 
-    public List<String> start(List<String> commands) {
-        for (String command : commands) {
+    public List<String> start(List<String> input) {
+        for (String command : input) {
             if (commandValidator.validate(command)) {
                 commandProcessor.execute(command);
                 commandStorage.storeValidCommand(command);
