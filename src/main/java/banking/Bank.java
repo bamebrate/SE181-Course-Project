@@ -46,26 +46,28 @@ public class Bank {
         accounts.get(toID).depositMoney(amount);
     }
 
-    public void passTime(int month) {
-        List<String> accountsToClose = new ArrayList<>();
+    public void passTime(int months) {
+        for (int month = 1; month <= months; month++) {
+            List<String> accountsToClose = new ArrayList<>();
 
-        for (String accountID : accounts.keySet()) {
-            Account account = accounts.get(accountID);
-            if (account.balance == 0) {
-                accountsToClose.add(accountID);
-                continue;
-            } else {
-                if (account.balance < 100) {
-                    accounts.get(accountID).withdrawMoney(25);
+            for (String accountID : accounts.keySet()) {
+                Account account = accounts.get(accountID);
+                if (account.balance == 0) {
+                    accountsToClose.add(accountID);
+                    continue;
+                } else {
+                    if (account.balance < 100) {
+                        accounts.get(accountID).withdrawMoney(25);
+                    }
+                    account.passTimeAndCalculateAPR(1);
                 }
-                account.passTimeAndCalculateAPR(month);
             }
-        }
 
 
-        for (String ID : accountsToClose) {
-            accounts.remove(ID);
-            accountList.remove(ID);
+            for (String ID : accountsToClose) {
+                accounts.remove(ID);
+                accountList.remove(ID);
+            }
         }
     }
 
